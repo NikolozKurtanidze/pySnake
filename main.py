@@ -46,7 +46,7 @@ def main():
         clock.tick(FPS)
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
-                RUN = False
+                pygame.quit()
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_d and move != 'l':
                     move = 'r'
@@ -62,16 +62,16 @@ def main():
             food_y = randrange(200, HEIGHT + 200, 20)
             snake_body.append(snake_body[-1])
         if move == 'r' and snake_body[0][0] >= WIDTH + 180:
-            RUN = False
+            main()
             break
         if move == 'l' and snake_body[0][0] <= 200:
-            RUN = False
+            main()
             break
         if move == 'u' and snake_body[0][1] <= 200:
-            RUN = False
+            main()
             break
         if move == 'd' and snake_body[0][1] >= HEIGHT + 180:
-            RUN = False
+            main()
             break
         if move == 'r':
             snake_body[0] = (snake_body[0][0] + 20, snake_body[0][1])
@@ -83,7 +83,7 @@ def main():
             snake_body[0] = (snake_body[0][0], snake_body[0][1] + 20)
         draw(snake_body, food_x, food_y)
         if snake_body[0] in snake_body[1:len(snake_body)]:
-            RUN = False
+            main()
         body_move(snake_body)
         
 
